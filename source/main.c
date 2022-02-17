@@ -4,6 +4,7 @@
 #include <time.h>
 #include "driver/elevio.h"
 #include "floor_module.h"
+#include "elev_module.h"
 
 
 int main(){
@@ -18,6 +19,8 @@ int main(){
 
     while(1){
         floor_light_on();
+        open_door();
+
 
         /*
         int floor = elevio_floorSensor();
