@@ -7,6 +7,11 @@
  * Library for floor
  */
 
+/**
+ * @brief Structure for holding data for each floor. Each floor have a unique initialization 
+ * of the struct
+ * 
+ */
 struct Floor{
     int this_floor;  
     int floor_btn;
