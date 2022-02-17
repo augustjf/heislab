@@ -5,6 +5,7 @@
 #include "driver/elevio.h"
 #include "floor_module.h"
 #include "elev_module.h"
+#include "queue_module.h"
 
 
 int main(){
@@ -20,6 +21,9 @@ int main(){
     while(1){
         floor_light_on();
         open_door();
+        stop();
+        //close_door();
+        
 
 
         /*
