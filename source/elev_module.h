@@ -1,10 +1,7 @@
 #pragma once 
-<<<<<<< HEAD
 #include "driver/elevio.h"
 #include <time.h>
-=======
 #include "elevio.h"
->>>>>>> origin/master
 
 /**
  * @file
