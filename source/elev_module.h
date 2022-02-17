@@ -1,10 +1,12 @@
 #pragma once 
+#include "driver/elevio.h"
+#include <time.h>
 
 struct elevator
 {
-    bool door;
-    bool door_obstruction;
-    bool stop;
+    int door;
+    int door_obstruction;
+    int stop;
 
     int next_floor;
     int current_floor;
