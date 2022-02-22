@@ -34,8 +34,8 @@ struct elevator
 
 /**
  * @brief This function is called when the elevator reaches its destination floor. The function opens the door and 
- * sets a timer for 3 seconds, while it continously checks for obstructions. If there is an obstruction the timer resets.
- * If the timer reaches 3 seconds the door will close.s
+ * sets a timer for 3 seconds, while it continously checks for obstructions. If there is an obstruction 
+ * or a stop button call the timer resets. If the timer reaches 3 seconds the door will close.
  */
 void floor_reached();
 

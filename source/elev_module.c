@@ -8,20 +8,15 @@ void floor_reached() {
     clock_t clock_init = clock();
 
     while(sec < trigger) {
-        if(elevio_obstruction()) {
+        if(elevio_obstruction() || elevio_stopButton()) {
             clock_init = clock();
         }
-        if(elevio_stopButton()){
-            break;
+        if(elevio_stopButton()) {
+            check_stop();
         }
         clock_t differense = clock() - clock_init;
         sec = differense / CLOCKS_PER_SEC;
     }
     
-    if(elevio_stopButton()){
-        check_stop();
-    }
-    else{
-        elevio_doorOpenLamp(0);
-    }
+    elevio_doorOpenLamp(0);
 }
