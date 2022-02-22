@@ -1,6 +1,12 @@
 #pragma once 
 #include "driver/elevio.h"
+#include <stdio.h>
 #include <time.h>
+
+/**
+* @file
+* @brief Library to control the functions of the elevator itself 
+*/
 
 struct elevator
 {
@@ -13,8 +19,12 @@ struct elevator
 
 };
 
+
+
 /**
- * @brief 
- * 
+ * @brief This function is called when the elevator reaches its destination floor. The function opens the door and 
+ * sets a timer for 3 seconds, while it continously checks for obstructions. If there is an obstruction the timer resets.
+ * If the timer reaches 3 seconds the door will close.s
  */
-void open_door();
+void floor_reached();
+
