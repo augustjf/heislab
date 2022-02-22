@@ -12,8 +12,9 @@ void floor_reached() {
             clock_init = clock();
         }
         if(elevio_stopButton()) {
-            check_stop();
+            elevio_stopLamp(1);
         }
+        
         clock_t differense = clock() - clock_init;
         sec = differense / CLOCKS_PER_SEC;
     }
