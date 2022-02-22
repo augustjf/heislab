@@ -13,15 +13,17 @@ int main(){
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
 
-    elevio_motorDirection(DIRN_UP);
-    elevio_doorOpenLamp(1);
+    elevio_stopLamp(0);
+    elevio_doorOpenLamp(0);
+
+    
+    
 
 
 
     while(1){
-        floor_light_on();
-        open_door();
-        stop();
+        check_stop();
+        floor_reached();
 
 
         /*

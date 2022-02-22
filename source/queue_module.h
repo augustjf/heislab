@@ -24,4 +24,11 @@ struct Queue{
  * @brief Read stop button from elevator, set motor drive to zero
  * 
  */
-void stop();
+int check_stop();
+
+
+/**
+ * @brief 
+ * 
+ */
+void run_elevator();

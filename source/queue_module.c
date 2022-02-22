@@ -1,13 +1,14 @@
 
 #include "queue_module.h"
 
-void stop(){
+int check_stop(){
     int stop_yn = elevio_stopButton();
     if(stop_yn == 1){
         elevio_stopLamp(1);
         elevio_motorDirection(0);
         
-    } 
+    }
+    return stop_yn; 
 }
 
 void run_elevator(){

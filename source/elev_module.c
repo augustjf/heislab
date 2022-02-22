@@ -9,17 +9,19 @@ void floor_reached() {
 
     while(sec < trigger) {
         if(elevio_obstruction()) {
-            clock_t clock_init = clock();
-            printf("Obstruksjon");
+            clock_init = clock();
         }
-        else if(elevio_stopButton()){
+        if(elevio_stopButton()){
             break;
         }
         clock_t differense = clock() - clock_init;
         sec = differense / CLOCKS_PER_SEC;
     }
     
-    if(!elevio_stopButton()){
+    if(elevio_stopButton()){
+        check_stop();
+    }
+    else{
         elevio_doorOpenLamp(0);
     }
 }
