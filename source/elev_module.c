@@ -1,4 +1,3 @@
-#pragma once
 #include "elev_module.h"
 
 void floor_reached() {

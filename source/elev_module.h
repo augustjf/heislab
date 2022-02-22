@@ -8,6 +8,17 @@
 * @brief Library to control the functions of the elevator itself 
 */
 
+/**
+ * @file
+ * @brief 
+ * Library for elevator
+ */
+
+
+/**
+ * @brief Structure for holding data for elevator
+ * 
+ */
 struct elevator
 {
     int door;
