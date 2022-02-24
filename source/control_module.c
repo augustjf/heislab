@@ -96,14 +96,6 @@ void run_elevator(){
                 
                 init_floor();
                 state = STANDBY;
-<<<<<<< HEAD
-                break;
-
-            case GO_TO:
-                
-
-=======
->>>>>>> 8677ab119051d15ee69eb19c77b311f6e41be8f5
                 break;
 
             case GO_TO:
