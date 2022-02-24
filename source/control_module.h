@@ -29,7 +29,13 @@ int check_stop();
 
 
 /**
- * @brief 
+ * @brief Overall control function 
  * 
  */
 void run_elevator();
+
+/**
+ * @brief Elevator goes to floor based on order from queue 
+ * 
+ */
+void go_to_floor(int floor);
