@@ -1,16 +1,14 @@
 #pragma once
 #include "driver/elevio.h"
+#include "elev_module.h"
+#include "stdio.h"
 /**
  * @file
  * @brief 
  * Library for queue and overall control
  */
 
-/**
- * @brief 
- * Structure for holding array of order and other data related to the elevator
- * and its movement
- */
+
 
     //mulige states
 typedef enum { 

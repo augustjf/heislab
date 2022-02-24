@@ -13,8 +13,8 @@
 
 void init_floor(void){
         if (elevio_floorSensor() == -1) {
-        elevio_motorDirection(-1);
-    }
+            elevio_motorDirection(-1);
+        }
 
     while (elevio_floorSensor() == -1){ //waits for elevator to reach a floor
     }
@@ -29,15 +29,35 @@ void stop(){
         elevio_motorDirection(0);
     } 
 }
-
+// 4  floor sensor: 2
+int prev_floor = 1;
 void go_to_floor(int floor){
-    while(floor > elevio_floorSensor()){
-        elevio_motorDirection(DIRN_UP);
-    }
+            
 
+            if(elevio_floorSensor() != -1){
+                prev_floor = elevio_floorSensor();
+            }
+            
+            printf("%d", prev_floor);
+        
+            if((floor - prev_floor) > 0 ){
+                elevio_motorDirection(DIRN_UP);
+            }
 
-    elevio_motorDirection(DIRN_STOP);
+            
+
+            else if((floor - prev_floor) < 0) {
+                elevio_motorDirection(DIRN_DOWN);
+            }
+
+            
+            else if((floor - prev_floor) == 0){
+                elevio_motorDirection(DIRN_STOP);
+                
+            }
 }
+
+        
 
 
 void run_elevator(){
@@ -61,11 +81,11 @@ void run_elevator(){
 
         switch(state){
             case INIT:
-                if (elevio_floorSensor == -1) {
+                if (elevio_floorSensor() == -1) {
                     elevio_motorDirection(-1);
                 }
 
-                while (elevio_floorSensor == -1){ //waits for elevator to reach a floor
+                while (elevio_floorSensor() == -1){ //waits for elevator to reach a floor
                 }
 
                 elevio_motorDirection(0);
@@ -75,6 +95,7 @@ void run_elevator(){
             case STANDBY:
                 //while not order, wait
                 //add_order(standby, dirn, )
+                
 
                 //if order, state = GO_TO
                 
