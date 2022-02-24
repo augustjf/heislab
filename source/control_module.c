@@ -10,6 +10,13 @@ void stop(){
     } 
 }
 
+void go_to_floor(int floor){
+    while(floor > elevio_floorSensor()){
+        elevio_motorDirection(DIRN_UP);
+    }
+    
+}
+
  
 
 void run_elevator(){
