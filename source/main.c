@@ -5,6 +5,7 @@
 #include "driver/elevio.h"
 #include "floor_module.h"
 #include "elev_module.h"
+#include "queue_module.h"
 
 
 int main(){
@@ -13,13 +14,17 @@ int main(){
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
 
-    //elevio_motorDirection(DIRN_UP);
+    elevio_stopLamp(0);
+    elevio_doorOpenLamp(0);
+
+    
+    
 
 
 
     while(1){
-        floor_light_on();
-        open_door();
+        check_stop();
+        floor_reached();
 
 
         /*

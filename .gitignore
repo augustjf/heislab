@@ -1,1 +1,10 @@
+<<<<<<< HEAD
 .vscode
+=======
+.vscode/
+build/
+elevator
+doxconfig.save
+html/
+latex/
+>>>>>>> 1bb17895989293bad897f55f3731d8972f7ff04f
