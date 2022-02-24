@@ -18,13 +18,17 @@ int main(){
     elevio_doorOpenLamp(0);
 
     
-    
+    int prev_floor = -1;
 
 
 
     while(1){
+        if(elevio_floorSensor() != -1){
+            prev_floor = elevio_floorSensor();
+        }
+        
         go_to_floor(2);
-
+        
 
         /*
         int floor = elevio_floorSensor();
