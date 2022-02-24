@@ -22,8 +22,7 @@ int main(){
 
 
     while(1){
-        check_stop();
-        floor_reached();
+        go_to_floor(2);
 
 
         /*

@@ -12,14 +12,14 @@
  * and its movement
  */
 
-//mulige states
+    //mulige states
 typedef enum { 
-INIT   = 0,
-STANDBY   = 1,
-FLOOR_REACHED = 2,
-STOP = 3,
+    INIT   = 0,
+    STANDBY   = 1,
+    GO_TO = 2,
+    FLOOR_REACHED = 3,
+    STOP = 4,
 } ELEV_STATE;
-
 
 /**
  * @brief Read stop button from elevator, set motor drive to zero
