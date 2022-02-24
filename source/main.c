@@ -5,6 +5,7 @@
 #include "driver/elevio.h"
 #include "floor_module.h"
 #include "elev_module.h"
+#include "queue_module.h"
 
 
 int main(){
