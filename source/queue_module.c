@@ -30,6 +30,15 @@ void stop(){
 }
 
 void run_elevator(){
+
+    //mulige states
+    typedef enum { 
+    INIT   = 0,
+    STANDBY   = 1,
+    FLOOR_REACHED = 2,
+    STOP = 3,
+    } ELEV_STATE;
+    
     ELEV_STATE state = INIT;  //settes automatisk til init
 
     //looper gjennom
@@ -41,7 +50,14 @@ void run_elevator(){
 
         switch(state){
             case INIT:
+                if (elevio_floorSensor == -1) {
+                    elevio_motorDirection(-1);
+                }
 
+                while (elevio_floorSensor == -1){ //waits for elevator to reach a floor
+                }
+
+                elevio_motorDirection(0);
                 state = STANDBY;
                 break;
             
