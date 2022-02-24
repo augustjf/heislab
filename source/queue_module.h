@@ -19,9 +19,31 @@ struct Queue{
     int next_floor;
 };
 
+typedef enum { 
+    INIT   = 0,
+    STANDBY   = 1,
+    GO_TO = 2,
+    FLOOR_REACHED = 3,
+    STOP = 3,
+    } ELEV_STATE;
+    
+/**
+ * @brief Init, drive elevator to known floor
+ * 
+ */
+void init_floor(void);
 
 /**
  * @brief Read stop button from elevator, set motor drive to zero
  * 
  */
-void stop();
+int check_stop();
+
+
+/**
+ * @brief 
+ * 
+ */
+void run_elevator();
+
+//void add_order(State s, dirn, knapp )
