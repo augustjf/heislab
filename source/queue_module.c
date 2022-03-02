@@ -15,14 +15,10 @@ void empty_queue() {
 }
 
 void add_to(int arr[], int call) {
-<<<<<<< HEAD
-    for (int i = 0; i < 50; i++) {
-=======
 
     
     
     for (int i = 0; i < array_size; i++) {
->>>>>>> e7848e1bb75f1a80157f1f71bec87bc9efb937a7
         if (arr[i] == 0) {
             arr[i] = call;
             break;

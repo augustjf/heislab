@@ -38,10 +38,7 @@ int main(){
         //loops buttons to turn on
         stop();
 
-        current_order = read_buttons();
-
-        floor_button_light_on(current_order);
-        //floor_button_light_off(current_order);
+    
 
         
       

@@ -9,7 +9,7 @@ void floor_light_on() {
     
 }
 
-void floor_button_light_on(Order o){
+void button_light_on(Order o){
     
     
     if( o.floor >= 0 && o.floor <= 3){
@@ -18,7 +18,7 @@ void floor_button_light_on(Order o){
 }
 
 
-void floor_button_light_off(Order o) {
+void button_light_off(Order o) {
     if(o.floor >= 0 && o.floor <= 3){
         elevio_buttonLamp(o.floor, o.btn, 0);    //because down-buttons are one level higher on board
     }
