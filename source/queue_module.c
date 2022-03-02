@@ -4,9 +4,18 @@
 int on_the_way_orders[50] = {0}; //orders coming from a floor as the cab is moving in that direction
 int cab_orders[50] = {0}; //orders from the cab, initialized to 50
 int floor_orders[50] = {0}; //orders form the floors
+int array_size = 50;
+
 
 void add_to(int arr[], int call) {
+<<<<<<< HEAD
     for (int i = 0; i < 50; i++) {
+=======
+
+    
+    
+    for (int i = 0; i < array_size; i++) {
+>>>>>>> 1469ae2cd011b7102aad46b74620c076049b07eb
         if (arr[i] == 0) {
             arr[i] = call;
             break;
@@ -52,7 +61,7 @@ int next_floor() {
 void add_call(ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_floor, ButtonType btn) {
     //PRIORITIZER//
     int already_in_queue = 0;
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < array_size; i++) {
         if(on_the_way_orders[i] == call_floor || cab_orders[i] == call_floor || floor_orders[i] == call_floor) {
             already_in_queue = 1;
             break;

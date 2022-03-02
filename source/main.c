@@ -10,6 +10,7 @@
 #include "control_module.h"
 
 
+
 int main(){
 
     
@@ -24,7 +25,7 @@ int main(){
     elevio_stopLamp(0);
     elevio_doorOpenLamp(0);
 
-
+    stop();
 
 
     while(1){
@@ -35,6 +36,7 @@ int main(){
         
 
         floor_button_light_on();
+      
         
         
 
