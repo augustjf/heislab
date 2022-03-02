@@ -15,13 +15,15 @@ void add_to(int arr[], int call) {
 }
 
 int next_floor() {
-    int next_on_the_way_order = on_the_way_orders[0];
 
     if (on_the_way_orders[0] != 0) {
         return on_the_way_orders[0];
     }
-    else if (cab_orders[0] != 0) {
-
+    else if (cab_orders[0] != 0 && on_the_way_orders[0] == 0) {
+        return cab_orders[0];
+    }
+    else if (floor_orders[0] != 0 && cab_orders[0] == 0 && on_the_way_orders[0] == 0) {
+        return floor_orders[0];
     }
 
     
