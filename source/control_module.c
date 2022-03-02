@@ -2,14 +2,6 @@
 
 #include "queue_module.h"
 
-/*void add_order(State s, dirn, knapp ) {
-    if(s = standby){
-        pri = 1;
-    }
-
-    if(s = )
-}
-*/
 
 void init_floor(void){
         if (elevio_floorSensor() == -1) {
@@ -56,13 +48,9 @@ void go_to_floor(int floor){
             }
 }
 
-        
-
 
 void run_elevator(){
 
-    
-    
     ELEV_STATE state = INIT;  //settes automatisk til init
 
     //looper gjennom
@@ -101,25 +89,6 @@ void run_elevator(){
                         floor_reached();
                                                 
                     }
-
-                while(elevio_stopButton() == 1) {
-                    elevio_stopLamp(1);
-                    //delete queue
-                    
-                }
-                
-                init_floor();
-                state = STANDBY;
-                break;
-
-            case GO_TO:
-                
-
-                break;
-
-            case FLOOR_REACHED:
-
-                break;
 
             default:
                 break;

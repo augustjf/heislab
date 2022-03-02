@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
@@ -6,6 +7,7 @@
 #include "floor_module.h"
 #include "elev_module.h"
 #include "queue_module.h"
+#include "control_module.h"
 
 
 int main(){
@@ -30,7 +32,10 @@ int main(){
             prev_floor = elevio_floorSensor();
         }
         
-        go_to_floor(3);
+        
+
+        floor_button_light_on();
+        
         
 
         /*

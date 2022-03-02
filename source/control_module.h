@@ -9,8 +9,10 @@
  */
 
 
-
-
+/**
+ * @brief Elevator states, used in switch to make state machine
+ * 
+ */
 typedef enum { 
     INIT   = 0,
     STANDBY   = 1,
@@ -23,7 +25,7 @@ typedef enum {
  * @brief Read stop button from elevator, set motor drive to zero
  * 
  */
-int check_stop();
+void stop();
 
 
 /**
