@@ -30,7 +30,7 @@ int main(){
             prev_floor = elevio_floorSensor();
         }
         
-        go_to_floor(2);
+        go_to_floor(3);
         
 
         /*

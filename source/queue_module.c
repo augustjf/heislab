@@ -6,7 +6,10 @@ int cab_orders[50]; //orders from the cab, initialized to 50
 int floor_orders[50]; //orders form the floors
 
 void add_to(int arr[], int call) {
-    for (int i = 0; i < sizeof(arr); i++) {
+
+    int arr_size = 50;
+
+    for (int i = 0; i < arr_size; i++) {   //deler på fordi sizeof gir byte
         if (arr[i] == 0) {
             arr[i] = call;
             break;
@@ -26,7 +29,7 @@ int next_floor() {
         return floor_orders[0];
     }
 
-    
+    return -1;
 }
 
 void add_order(ELEV_STATE state, MotorDirection dirn, int current_floor, int call_floor, int prev_floor, ButtonType btn) {

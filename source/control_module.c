@@ -38,8 +38,7 @@ void go_to_floor(int floor){
                 prev_floor = elevio_floorSensor();
             }
             
-            printf("%d", prev_floor);
-        
+            
             if((floor - prev_floor) > 0 ){
                 elevio_motorDirection(DIRN_UP);
             }
