@@ -118,7 +118,7 @@ void run_elevator(){
                 break;
 
             case FLOOR_REACHED:
-
+                
                 break;
 
             default:
