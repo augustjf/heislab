@@ -28,3 +28,15 @@ struct Floor{
  * 
  */
 void floor_light_on();
+
+/**
+ * @brief floor button light on 
+ * 
+ */
+void floor_button_light_on();
+
+/**
+ * @brief floor light on off, called from floor reached
+ * 
+ */
+void floor_button_light_off();

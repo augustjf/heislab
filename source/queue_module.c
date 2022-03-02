@@ -46,10 +46,8 @@ int next_floor() {
 
     return -1;
 }
-
-
-
-void add_call(ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_floor, ButtonType btn) {
+/*
+void add_order(ELEV_STATE state, MotorDirection dirn, int current_floor, int call_floor, int prev_floor, ButtonType btn) {
     //PRIORITIZER//
     int already_in_queue = 0;
     for (int i = 0; i < 50; i++) {
@@ -95,3 +93,4 @@ void add_call(ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_fl
         }
     }
 }
+*/
