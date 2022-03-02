@@ -1,5 +1,6 @@
 #include "floor_module.h"
 
+
 void floor_light_on() {
     int current_floor = elevio_floorSensor();
     if(current_floor != -1){
@@ -8,24 +9,18 @@ void floor_light_on() {
     
 }
 
-void floor_button_light_on(){
+void floor_button_light_on(Order o){
     
-    for(int i = 0; i < 4; i++){
-        if(elevio_callButton(i, BUTTON_HALL_UP) == 1){
-            elevio_buttonLamp(i, BUTTON_HALL_UP, 1);
-        }
+    
+    if( o.floor >= 0 && o.floor <= 3){
+        elevio_buttonLamp(o.floor, o.btn, 1);    //because down-buttons are one level higher on board
     }
+}
 
-    for(int i = 0; i < 4; i++){
-        if(elevio_callButton(i, BUTTON_HALL_DOWN) == 1){
-            elevio_buttonLamp(i, BUTTON_HALL_DOWN, 1);
-        }
-    }
-    
-    for(int i = 0; i < 4; i++){
-        if(elevio_callButton(i, BUTTON_CAB) == 1){
-            elevio_buttonLamp(i, BUTTON_CAB, 1);
-        }
+
+void floor_button_light_off(Order o) {
+    if(o.floor >= 0 && o.floor <= 3){
+        elevio_buttonLamp(o.floor, o.btn, 0);    //because down-buttons are one level higher on board
     }
 
 }
