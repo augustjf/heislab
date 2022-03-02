@@ -1,7 +1,7 @@
 #include "queue_module.h"
 
 //Make function to increase array size if needed
-int on_the_way_orders[3] = {0}; //orders coming from a floor as the cab is moving in that direction
+int on_the_way_orders[50] = {0}; //orders coming from a floor as the cab is moving in that direction
 int cab_orders[50] = {0}; //orders from the cab, initialized to 50
 int floor_orders[50] = {0}; //orders form the floors
 
@@ -18,7 +18,7 @@ void add_to(int arr[], int call) {
 
 void floor_reached(int current_floor) {
     if (on_the_way_orders[0] == current_floor) {
-        for (int i = 0; i < (3 - 1); i++) {
+        for (int i = 0; i < (50 - 1); i++) {
             on_the_way_orders[i] = on_the_way_orders[i+1];
         }
     }    
@@ -51,37 +51,46 @@ int next_floor() {
 /*
 void add_order(ELEV_STATE state, MotorDirection dirn, int current_floor, int call_floor, int prev_floor, ButtonType btn) {
     //PRIORITIZER//
-
-    if (state == STANDBY) {
-        if (btn == BUTTON_CAB) {
-            add_to(cab_orders, call_floor);
+    int already_in_queue = 0;
+    for (int i = 0; i < 50; i++) {
+        if(on_the_way_orders[i] == call_floor || cab_orders[i] == call_floor || floor_orders[i] == call_floor) {
+            already_in_queue = 1;
+            break;
         }
-        else if (btn == BUTTON_HALL_DOWN || btn == BUTTON_HALL_UP) {
-            add_to(floor_orders, call_floor);
-        }
-
-        //on_the_way_orders cannot happen in STANDBY
     }
 
-    if (state == GO_TO) {
-        if (btn == BUTTON_CAB) {
-            add_to(cab_orders, call_floor);
-        }
-        else if (btn == BUTTON_HALL_DOWN) {
-            if (dirn == DIRN_DOWN && call_floor < prev_floor) {
-                add_to(on_the_way_orders, call_floor);
+    if(already_in_queue = 0) {
+        if (state == STANDBY) {
+            if (btn == BUTTON_CAB) {
+                add_to(cab_orders, call_floor);
             }
-            else {
+            else if (btn == BUTTON_HALL_DOWN || btn == BUTTON_HALL_UP) {
                 add_to(floor_orders, call_floor);
             }
 
+            //on_the_way_orders cannot happen in STANDBY
         }
-        else if (btn == BUTTON_HALL_UP) {
-            if (dirn == DIRN_UP && call_floor > prev_floor) {
-                add_to(on_the_way_orders, call_floor);
+
+        if (state == GO_TO) {
+            if (btn == BUTTON_CAB) {
+                add_to(cab_orders, call_floor);
             }
-            else {
-                add_to(floor_orders, call_floor);
+            else if (btn == BUTTON_HALL_DOWN) {
+                if (dirn == DIRN_DOWN && call_floor < prev_floor) {
+                    add_to(on_the_way_orders, call_floor);
+                }
+                else {
+                    add_to(floor_orders, call_floor);
+                }
+
+            }
+            else if (btn == BUTTON_HALL_UP) {
+                if (dirn == DIRN_UP && call_floor > prev_floor) {
+                    add_to(on_the_way_orders, call_floor);
+                }
+                else {
+                    add_to(floor_orders, call_floor);
+                }
             }
         }
     }
