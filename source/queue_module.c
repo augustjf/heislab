@@ -6,6 +6,8 @@ int cab_orders[50] = {0}; //orders from the cab, initialized to 50
 int floor_orders[50] = {0}; //orders form the floors
 
 void add_to(int arr[], int call) {
+
+    
     for (int i = 0; i < sizeof(arr); i++) {
         if (arr[i] == 0) {
             arr[i] = call;
