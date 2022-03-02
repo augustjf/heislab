@@ -11,31 +11,39 @@
 
 
 
+
 int main(){
 
     
-   int prev_floor = -1;
+   
 
 
     elevio_init();
     
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
-
-    elevio_stopLamp(0);
-    elevio_doorOpenLamp(0);
-
-    stop();
-
+////////////////////////////////////////////////////////////////////////////
+   
+   ELEV_STATE state = INIT; 
+   int prev_floor = -1;
+   
+   Order current_order;
+   current_order.floor = -1;
 
     while(1){
         if(elevio_floorSensor() != -1){
             prev_floor = elevio_floorSensor();
         }
         
-        
+        //loops buttons to turn on
+        stop();
 
-        floor_button_light_on();
+        current_order = read_buttons();
+
+        floor_button_light_on(current_order);
+        //floor_button_light_off(current_order);
+
+        
       
         
         

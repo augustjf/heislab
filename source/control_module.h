@@ -21,6 +21,12 @@ typedef enum {
     STOP = 4,
 } ELEV_STATE;
 
+typedef struct{
+    int floor;
+    ButtonType btn;
+}Order;
+
+
 /**
  * @brief Read stop button from elevator, set motor drive to zero
  * 
@@ -32,10 +38,12 @@ void stop();
  * @brief Overall control function 
  * 
  */
-void run_elevator();
+void run_elevator(ELEV_STATE state);
 
 /**
  * @brief Elevator goes to floor based on order from queue 
  * 
  */
 void go_to_floor(int floor);
+
+Order read_buttons();

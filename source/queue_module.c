@@ -8,14 +8,10 @@ int array_size = 50;
 
 
 void add_to(int arr[], int call) {
-<<<<<<< HEAD
-    for (int i = 0; i < 50; i++) {
-=======
 
     
     
     for (int i = 0; i < array_size; i++) {
->>>>>>> 1469ae2cd011b7102aad46b74620c076049b07eb
         if (arr[i] == 0) {
             arr[i] = call;
             break;
@@ -53,7 +49,7 @@ int next_floor() {
         return floor_orders[0];
     }
 
-    return -1;
+
 }
 
 
@@ -68,7 +64,7 @@ void add_call(ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_fl
         }
     }
 
-    if(already_in_queue = 0) {
+    if(already_in_queue == 0) {
         if (state == STANDBY) {
             if (btn == BUTTON_CAB) {
                 add_to(cab_orders, call_floor);
