@@ -1,9 +1,9 @@
 #include "queue_module.h"
 
 //Make function to increase array size if needed
-int on_the_way_orders[50] = {0}; //orders coming from a floor as the cab is moving in that direction
-int cab_orders[50] = {0}; //orders from the cab, initialized to 50
-int floor_orders[50] = {0}; //orders form the floors
+int on_the_way_orders[50] = {-1}; //orders coming from a floor as the cab is moving in that direction
+int cab_orders[50] = {-1}; //orders from the cab, initialized to 50
+int floor_orders[50] = {-1}; //orders form the floors
 int array_size = 50;
 
 void empty_queue() {
@@ -15,15 +15,8 @@ void empty_queue() {
 }
 
 void add_to(int arr[], int call) {
-<<<<<<< HEAD
     for (int i = 0; i < 50; i++) {
-=======
-
-    
-    
-    for (int i = 0; i < array_size; i++) {
->>>>>>> e7848e1bb75f1a80157f1f71bec87bc9efb937a7
-        if (arr[i] == 0) {
+        if (arr[i] == -1) {
             arr[i] = call;
             break;
         }
@@ -50,17 +43,17 @@ void call_finished(int current_floor) {
 
 int next_floor() {
 
-    if (on_the_way_orders[0] != 0) {
+    if (on_the_way_orders[0] != -1) {
         return on_the_way_orders[0];
     }
-    else if (cab_orders[0] != 0 && on_the_way_orders[0] == 0) {
+    else if (cab_orders[0] != -1 && on_the_way_orders[0] == -1) {
         return cab_orders[0];
     }
-    else if (floor_orders[0] != 0 && cab_orders[0] == 0 && on_the_way_orders[0] == 0) {
+    else if (floor_orders[0] != -1 && cab_orders[0] == -1 && on_the_way_orders[0] == -1) {
         return floor_orders[0];
     }
 
-
+    return -1;
 }
 
 
@@ -75,7 +68,7 @@ void add_call(ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_fl
         }
     }
 
-    if(already_in_queue == 0) {
+    if(already_in_queue = 0) {
         if (state == STANDBY) {
             if (btn == BUTTON_CAB) {
                 add_to(cab_orders, call_floor);
