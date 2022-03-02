@@ -1,18 +1,33 @@
 #include "queue_module.h"
 
 //Make function to increase array size if needed
-int on_the_way_orders[3]; //orders coming from a floor as the cab is moving in that direction
-int cab_orders[50]; //orders from the cab, initialized to 50
-int floor_orders[50]; //orders form the floors
+int on_the_way_orders[3] = {0}; //orders coming from a floor as the cab is moving in that direction
+int cab_orders[50] = {0}; //orders from the cab, initialized to 50
+int floor_orders[50] = {0}; //orders form the floors
 
 void add_to(int arr[], int call) {
-
-    int arr_size = 50;
-
-    for (int i = 0; i < arr_size; i++) {   //deler på fordi sizeof gir byte
+    for (int i = 0; i < sizeof(arr); i++) {
         if (arr[i] == 0) {
             arr[i] = call;
             break;
+        }
+    }
+}
+
+void floor_reached(int current_floor) {
+    if (on_the_way_orders[0] == current_floor) {
+        for (int i = 0; i < (3 - 1); i++) {
+            on_the_way_orders[i] = on_the_way_orders[i+1];
+        }
+    }    
+    else if (cab_orders[0] == current_floor) {
+        for (int i = 0; 1 < (50 - 1); i++) {
+            cab_orders[i] = cab_orders[i+1];
+        }
+    }
+    else if (floor_orders[0] == current_floor) {
+        for (int i = 0; 1 < (50 - 1); i++) {
+            floor_orders[i] = floor_orders[i+1];
         }
     }
 }

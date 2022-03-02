@@ -90,6 +90,25 @@ void run_elevator(){
                                                 
                     }
 
+                while(elevio_stopButton() == 1) {
+                    elevio_stopLamp(1);
+                    //delete queue
+                    
+                }
+                
+                init_floor();
+                state = STANDBY;
+                break;
+
+            case GO_TO:
+                
+
+                break;
+
+            case FLOOR_REACHED:
+                
+                break;
+
             default:
                 break;
         }
