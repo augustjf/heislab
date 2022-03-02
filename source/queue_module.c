@@ -23,9 +23,11 @@ int next_floor() {
     else if (cab_orders[0] != 0) {
 
     }
+
+    
 }
 
-void add_call(ELEV_STATE state, MotorDirection dirn, int prev_floor, int call_floor, ButtonType btn) {
+void add_order(ELEV_STATE state, MotorDirection dirn, int current_floor, int call_floor, int prev_floor, ButtonType btn) {
     //PRIORITIZER//
 
     if (state == STANDBY) {

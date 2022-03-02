@@ -62,13 +62,7 @@ void go_to_floor(int floor){
 
 void run_elevator(){
 
-    //mulige states
-    typedef enum { 
-    INIT   = 0,
-    STANDBY   = 1,
-    FLOOR_REACHED = 2,
-    STOP = 3,
-    } ELEV_STATE;
+    
     
     ELEV_STATE state = INIT;  //settes automatisk til init
 
@@ -122,6 +116,13 @@ void run_elevator(){
             case GO_TO:
                 
 
+                break;
+
+            case FLOOR_REACHED:
+
+                break;
+
+            default:
                 break;
         }
     }

@@ -9,6 +9,11 @@
 
 
 int main(){
+
+    
+   int prev_floor = -1;
+
+
     elevio_init();
     
     printf("=== Example Program ===\n");
@@ -17,8 +22,6 @@ int main(){
     elevio_stopLamp(0);
     elevio_doorOpenLamp(0);
 
-    
-    int prev_floor = -1;
 
 
 

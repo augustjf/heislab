@@ -10,7 +10,7 @@
 
 
 
-    //mulige states
+
 typedef enum { 
     INIT   = 0,
     STANDBY   = 1,
