@@ -1,7 +1,6 @@
 #pragma once
 #include "driver/elevio.h"
 #include "elev_module.h"
-#include "control_module.h"
 #include "stdio.h"
 /**
  * @file
