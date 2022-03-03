@@ -6,7 +6,6 @@
 #include "driver/elevio.h"
 #include "floor_module.h"
 #include "elev_module.h"
-#include "queue_module.h"
 #include "control_module.h"
 
 
@@ -24,62 +23,34 @@ int main(){
     printf("Press the stop button on the elevator panel to exit\n");
 ////////////////////////////////////////////////////////////////////////////
    
-   enum ELEV_STATE state = INIT; 
-   int prev_floor = -1;
+    enum ELEV_STATE state = INIT; 
+    enum ELEV_STATE *state_ptr;
+    state_ptr = &state;
+
+    int prev_floor = -1;
+    int *prev_floor_ptr;
+    prev_floor_ptr = &prev_floor;
    
-   Order current_order;
-   current_order.floor = -1;
-   MotorDirection current_dirn;
+
+    MotorDirection current_dirn = STOP;
+    MotorDirection *current_dirn_ptr;
+    current_dirn_ptr = current_dirn;
+
+    empty_queue();
+
 
     while(1){
+        read_buttons(state_ptr, current_dirn_ptr, prev_floor_ptr);
         if(elevio_floorSensor() != -1){
-            prev_floor = elevio_floorSensor();
+            *prev_floor_ptr = elevio_floorSensor();
         }
+        run_elevator(state_ptr, current_dirn_ptr, prev_floor_ptr);
+
         
-        //loops buttons to turn on
-        stop();
+
 
     
 
-        
-      
-        
-        
-
-        /*
-        int floor = elevio_floorSensor();
-        printf("floor: %d \n",floor);
-
-        if(floor == 0){
-            elevio_motorDirection(DIRN_UP);
-        }
-
-        if(floor == N_FLOORS-1){
-            elevio_motorDirection(DIRN_DOWN);
-        }
-
-
-        for(int f = 0; f < N_FLOORS; f++){
-            for(int b = 0; b < N_BUTTONS; b++){
-                int btnPressed = elevio_callButton(f, b);
-                elevio_buttonLamp(f, b, btnPressed);
-            }
-        }
-
-        if(elevio_obstruction()){
-            elevio_stopLamp(1);
-        } else {
-            elevio_stopLamp(0);
-        }
-        
-        if(elevio_stopButton()){
-            elevio_motorDirection(DIRN_STOP);
-            break;
-        }
-
-
-        
-        */
         nanosleep(&(struct timespec){0, 20*1000*1000}, NULL);
     }
 

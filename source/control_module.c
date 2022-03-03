@@ -1,6 +1,7 @@
 #include "control_module.h"
 
-#include "queue_module.h"
+
+
 
 
 void init_floor(void){
@@ -14,11 +15,12 @@ void init_floor(void){
     elevio_motorDirection(0);
 }
 
-void stop(){
+void stop(MotorDirection *dirn){
     int stop_yn = elevio_stopButton();
     if(stop_yn == 1){
         elevio_stopLamp(1);
         elevio_motorDirection(0);
+        *dirn = DIRN_STOP;
     } 
     else{
         elevio_stopLamp(0);
@@ -26,39 +28,44 @@ void stop(){
 }
 
 
-void go_to_floor(int floor, int prev_floor){
+int go_to_floor(int floor, int *prev_floor, MotorDirection *dirn){
             
 
-    if(elevio_floorSensor() != -1){
-        prev_floor = elevio_floorSensor();
-    }
-    
-    
-    if((floor - prev_floor) > 0 ){
+    if((floor - *prev_floor) > 0 ){
         elevio_motorDirection(DIRN_UP);
+        dirn = DIRN_UP;
     }
 
     
 
-    else if((floor - prev_floor) < 0) {
+    else if((floor - *prev_floor) < 0) {
         elevio_motorDirection(DIRN_DOWN);
+        dirn = DIRN_DOWN;
     }
 
     
-    else if((floor - prev_floor) == 0){
+    else if((floor - *prev_floor) == 0){
         elevio_motorDirection(DIRN_STOP);
-        
+        dirn = DIRN_STOP;
+        return 1;
     }
 }
 
 
-void run_elevator( enum ELEV_STATE state, MotorDirection current_dirn, int prev_floor){
-        
+
+
+void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *prev_floor){
+    
+
+
     if(elevio_stopButton() == 1){  //må alltid sjekke om det er stop
         state = STOP;
     }
 
-    switch(state){
+
+    enum ELEV_STATE deref_state = *state;
+
+    switch(deref_state){
         case INIT:
             if (elevio_floorSensor() == -1) {
                 elevio_motorDirection(-1);
@@ -68,17 +75,16 @@ void run_elevator( enum ELEV_STATE state, MotorDirection current_dirn, int prev_
             }
 
             elevio_motorDirection(0);
-            state = STANDBY;
+            *state = STANDBY;
             break;
         
         case STANDBY:
-            //while not order, wait
-            //add_order(standby, dirn, )
-            //if order, state = GO_TO
-
-            Order current_order = read_buttons();
-            add_call(STANDBY, current_dirn, prev_floor, current_order.floor, current_order.btn);
+            if(next_floor() != -1) {
+                *state = GO_TO;
+            }
             
+            
+            *state = STANDBY;
             break;
 
         case STOP:
@@ -96,16 +102,18 @@ void run_elevator( enum ELEV_STATE state, MotorDirection current_dirn, int prev_
             }
             
             init_floor();
-            state = STANDBY;
+            *state = STANDBY;
             break;
 
         case GO_TO:
-            
-
+            read_buttons(state, current_dirn, prev_floor);
+            go_to_floor(next_floor(), prev_floor, current_dirn);
             break;
 
         case FLOOR_REACHED:
-            
+            //stop
+            //floor_reached
+            //empty_queue
             break;
 
         default:
@@ -114,27 +122,5 @@ void run_elevator( enum ELEV_STATE state, MotorDirection current_dirn, int prev_
 }
 
 
-Order read_buttons() {
-    Order current_order;
-    for(int i = 0; i < 4; i++){
-        if(elevio_callButton(i, BUTTON_HALL_UP) == 1){
-            current_order.floor = i;                    //+1 because down buttons are one level higher on board
-            current_order.btn = BUTTON_HALL_UP;
 
-        }
-        if(elevio_callButton(i, BUTTON_HALL_DOWN) == 1){
-            current_order.floor = i;
-            current_order.btn = BUTTON_HALL_DOWN;
-        }
-    }
-
-    for(int i = 0; i < 4; i++){
-        if(elevio_callButton(i, BUTTON_CAB) == 1){
-            current_order.floor = i;
-            current_order.btn = BUTTON_CAB;
-        }
-
-    }
-    return current_order;
-}
 
