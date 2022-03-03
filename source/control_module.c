@@ -52,7 +52,7 @@ void go_to_floor(int floor, int prev_floor){
 }
 
 
-void run_elevator(ELEV_STATE state){
+void run_elevator(ELEV_STATE state, MotorDirection current_dirn, int prev_floor){
         
     if(elevio_stopButton() == 1){  //må alltid sjekke om det er stop
         state = STOP;
@@ -74,9 +74,10 @@ void run_elevator(ELEV_STATE state){
         case STANDBY:
             //while not order, wait
             //add_order(standby, dirn, )
-            
-
             //if order, state = GO_TO
+
+            Order current_order = read_buttons();
+            add_call(STANDBY, current_dirn, prev_floor, current_order.floor, current_order.btn);
             
             break;
 

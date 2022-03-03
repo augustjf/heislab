@@ -38,7 +38,7 @@ void stop();
  * @brief Overall control function 
  * 
  */
-void run_elevator(ELEV_STATE state);
+void run_elevator(ELEV_STATE state, MotorDirection current_dirn, int prev_floor);
 
 void init_floor(void);
 

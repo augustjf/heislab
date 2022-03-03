@@ -68,7 +68,7 @@ void add_call(ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_fl
         }
     }
 
-    if(already_in_queue = 0) {
+    if(already_in_queue == 0) {
         if (state == STANDBY) {
             if (btn == BUTTON_CAB) {
                 add_to(cab_orders, call_floor);

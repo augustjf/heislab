@@ -18,9 +18,6 @@ int main(){
    
 
 
-<<<<<<< HEAD
-    init_floor();
-=======
     elevio_init();
     
     printf("=== Example Program ===\n");
@@ -32,16 +29,13 @@ int main(){
    
    Order current_order;
    current_order.floor = -1;
+   MotorDirection current_dirn;
 
->>>>>>> 61cdbce733a9f9ff3d84c6b4c78ade12015735d0
     while(1){
         if(elevio_floorSensor() != -1){
             prev_floor = elevio_floorSensor();
         }
         
-<<<<<<< HEAD
-        go_to_floor(3, prev_floor);
-=======
         //loops buttons to turn on
         stop();
 
@@ -50,7 +44,6 @@ int main(){
         
       
         
->>>>>>> 61cdbce733a9f9ff3d84c6b4c78ade12015735d0
         
 
         /*
