@@ -33,10 +33,10 @@ void floor_light_on();
  * @brief floor button light on 
  * 
  */
-void button_light_on();
+void button_light_on(int floor, ButtonType btn);
 
 /**
  * @brief floor light on off, called from floor reached
  * 
  */
-void button_light_off(Order o);
+void button_light_off(int floor, ButtonType btn);

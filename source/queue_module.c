@@ -1,16 +1,16 @@
 #include "queue_module.h"
 
 //Make function to increase array size if needed
-int on_the_way_orders[50] = {-1}; //orders coming from a floor as the cab is moving in that direction
-int cab_orders[50] = {-1}; //orders from the cab, initialized to 50
-int floor_orders[50] = {-1}; //orders form the floors
+int on_the_way_orders[50]; //orders coming from a floor as the cab is moving in that direction
+int cab_orders[50]; //orders from the cab, initialized to 50
+int floor_orders[50]; //orders form the floors
 int array_size = 50;
 
 void empty_queue() {
     for (int i = 0; i < array_size; i++) {
-        on_the_way_orders[i] = 0;
-        cab_orders[i] = 0;
-        floor_orders[i] = 0;
+        on_the_way_orders[i] = -1;
+        cab_orders[i] = -1;
+        floor_orders[i] = -1;
     }
 }
 
@@ -21,6 +21,7 @@ void add_to(int arr[], int call) {
             break;
         }
     }
+    print_arrays();
 }
 
 void call_finished(int current_floor) {
@@ -52,13 +53,35 @@ int next_floor() {
     else if (floor_orders[0] != -1 && cab_orders[0] == -1 && on_the_way_orders[0] == -1) {
         return floor_orders[0];
     }
+    else{
+        return -1;
+    }
+}
 
-    return -1;
+void read_buttons(enum ELEV_STATE *state, MotorDirection *dirn, int *prev_floor) {
+
+    for(int i = 0; i < 4; i++){
+        if(elevio_callButton(i, BUTTON_HALL_UP) == 1){
+            add_call(state, dirn, i, prev_floor, BUTTON_HALL_UP);
+            button_light_on(i, BUTTON_HALL_UP);
+        }
+        if(elevio_callButton(i, BUTTON_HALL_DOWN) == 1){
+            add_call(state, dirn, i, prev_floor, BUTTON_HALL_DOWN);
+            button_light_on(i, BUTTON_HALL_DOWN);
+        }
+    }
+
+    for(int i = 0; i < 4; i++){
+        if(elevio_callButton(i, BUTTON_CAB) == 1){
+            add_call(state, dirn, i, prev_floor, BUTTON_CAB);
+            button_light_on(i, BUTTON_CAB);
+        }
+    }
 }
 
 
 
-void add_call(enum ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_floor, ButtonType btn) {
+void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int *prev_floor, ButtonType btn) {
     //PRIORITIZER//
     int already_in_queue = 0;
     for (int i = 0; i < array_size; i++) {
@@ -69,7 +92,7 @@ void add_call(enum ELEV_STATE state, MotorDirection dirn, int call_floor, int pr
     }
 
     if(already_in_queue == 0) {
-        if (state == STANDBY) {
+        if (*state == STANDBY) {
             if (btn == BUTTON_CAB) {
                 add_to(cab_orders, call_floor);
             }
@@ -80,12 +103,12 @@ void add_call(enum ELEV_STATE state, MotorDirection dirn, int call_floor, int pr
             //on_the_way_orders cannot happen in STANDBY
         }
 
-        if (state == GO_TO) {
+        if (*state == GO_TO) {
             if (btn == BUTTON_CAB) {
                 add_to(cab_orders, call_floor);
             }
             else if (btn == BUTTON_HALL_DOWN) {
-                if (dirn == DIRN_DOWN && call_floor < prev_floor) {
+                if (*dirn == DIRN_DOWN && call_floor < *prev_floor) {
                     add_to(on_the_way_orders, call_floor);
                 }
                 else {
@@ -94,7 +117,7 @@ void add_call(enum ELEV_STATE state, MotorDirection dirn, int call_floor, int pr
 
             }
             else if (btn == BUTTON_HALL_UP) {
-                if (dirn == DIRN_UP && call_floor > prev_floor) {
+                if (*dirn == DIRN_UP && call_floor > *prev_floor) {
                     add_to(on_the_way_orders, call_floor);
                 }
                 else {
@@ -103,4 +126,23 @@ void add_call(enum ELEV_STATE state, MotorDirection dirn, int call_floor, int pr
             }
         }
     }
+}
+
+void print_arrays() {
+    printf("On the way orders:");
+    for (int i = 0; i < array_size; i++) {
+        printf("|%i|", on_the_way_orders[i]);
+        
+    }
+    printf("------------------------ \n");
+    printf("Cab orders");
+    for (int i = 0; i < array_size; i++) {
+        printf("|%i|", cab_orders[i]);
+    }
+    printf("------------------------ \n");
+    printf("Floor orders");
+    for (int i = 0; i < array_size; i++) {
+        printf("|%i|", floor_orders[i]);
+    }
+    printf("------------------------ \n");
 }
