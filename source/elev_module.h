@@ -37,5 +37,5 @@ struct elevator
  * sets a timer for 3 seconds, while it continously checks for obstructions. If there is an obstruction 
  * or a stop button call the timer resets. If the timer reaches 3 seconds the door will close.
  */
-void floor_reached();
+void door_handler(enum ELEV_STATE *state, MotorDirection *current_dirn, int *prev_floor);
 

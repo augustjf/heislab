@@ -53,4 +53,4 @@ void init_floor(void);
  * @brief Elevator goes to floor based on order from queue 
  * 
  */
-int go_to_floor(int floor, int *prev_floor, MotorDirection *dirn);
+void go_to_floor(int floor, int *prev_floor, MotorDirection *dirn);
