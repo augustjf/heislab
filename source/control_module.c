@@ -52,7 +52,7 @@ void go_to_floor(int floor, int prev_floor){
 }
 
 
-void run_elevator(ELEV_STATE state, MotorDirection current_dirn, int prev_floor){
+void run_elevator( enum ELEV_STATE state, MotorDirection current_dirn, int prev_floor){
         
     if(elevio_stopButton() == 1){  //må alltid sjekke om det er stop
         state = STOP;

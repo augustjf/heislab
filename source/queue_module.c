@@ -25,17 +25,17 @@ void add_to(int arr[], int call) {
 
 void call_finished(int current_floor) {
     if (on_the_way_orders[0] == current_floor) {
-        for (int i = 0; i < (50 - 1); i++) {
+        for (int i = 0; i < (array_size - 1); i++) {
             on_the_way_orders[i] = on_the_way_orders[i+1];
         }
     }    
     else if (cab_orders[0] == current_floor) {
-        for (int i = 0; 1 < (50 - 1); i++) {
+        for (int i = 0; 1 < (array_size - 1); i++) {
             cab_orders[i] = cab_orders[i+1];
         }
     }
     else if (floor_orders[0] == current_floor) {
-        for (int i = 0; 1 < (50 - 1); i++) {
+        for (int i = 0; 1 < (array_size - 1); i++) {
             floor_orders[i] = floor_orders[i+1];
         }
     }
@@ -58,10 +58,10 @@ int next_floor() {
 
 
 
-void add_call(ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_floor, ButtonType btn) {
+void add_call(enum ELEV_STATE state, MotorDirection dirn, int call_floor, int prev_floor, ButtonType btn) {
     //PRIORITIZER//
     int already_in_queue = 0;
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < array_size; i++) {
         if(on_the_way_orders[i] == call_floor || cab_orders[i] == call_floor || floor_orders[i] == call_floor) {
             already_in_queue = 1;
             break;

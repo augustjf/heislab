@@ -24,7 +24,7 @@ int main(){
     printf("Press the stop button on the elevator panel to exit\n");
 ////////////////////////////////////////////////////////////////////////////
    
-   ELEV_STATE state = INIT; 
+   enum ELEV_STATE state = INIT; 
    int prev_floor = -1;
    
    Order current_order;
