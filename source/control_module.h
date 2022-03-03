@@ -1,6 +1,7 @@
 #pragma once
 #include "driver/elevio.h"
 #include "elev_module.h"
+#include "control_module.h"
 #include "stdio.h"
 /**
  * @file
@@ -13,13 +14,14 @@
  * @brief Elevator states, used in switch to make state machine
  * 
  */
-typedef enum { 
-    INIT   = 0,
-    STANDBY   = 1,
-    GO_TO = 2,
-    FLOOR_REACHED = 3,
-    STOP = 4,
-} ELEV_STATE;
+
+enum ELEV_STATE{ 
+    INIT,
+    STANDBY,
+    GO_TO,
+    FLOOR_REACHED,
+    STOP,
+};
 
 typedef struct{
     int floor;
@@ -38,7 +40,7 @@ void stop();
  * @brief Overall control function 
  * 
  */
-void run_elevator(ELEV_STATE state);
+void run_elevator(enum ELEV_STATE state);
 
 /**
  * @brief Elevator goes to floor based on order from queue 
