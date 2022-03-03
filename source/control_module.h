@@ -9,8 +9,10 @@
  */
 
 
-
-    //mulige states
+/**
+ * @brief Elevator states, used in switch to make state machine
+ * 
+ */
 typedef enum { 
     INIT   = 0,
     STANDBY   = 1,
@@ -19,18 +21,24 @@ typedef enum {
     STOP = 4,
 } ELEV_STATE;
 
+typedef struct{
+    int floor;
+    ButtonType btn;
+}Order;
+
+
 /**
  * @brief Read stop button from elevator, set motor drive to zero
  * 
  */
-int check_stop();
+void stop();
 
 
 /**
  * @brief Overall control function 
  * 
  */
-void run_elevator();
+void run_elevator(ELEV_STATE state);
 
 void init_floor(void);
 
@@ -39,3 +47,5 @@ void init_floor(void);
  * 
  */
 void go_to_floor(int floor, int prev_floor);
+
+Order read_buttons();

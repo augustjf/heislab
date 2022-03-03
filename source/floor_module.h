@@ -1,6 +1,6 @@
 #pragma once
 #include "driver/elevio.h"
-
+#include "control_module.h"
 /**
  * @file
  * @brief 
@@ -28,3 +28,15 @@ struct Floor{
  * 
  */
 void floor_light_on();
+
+/**
+ * @brief floor button light on 
+ * 
+ */
+void button_light_on();
+
+/**
+ * @brief floor light on off, called from floor reached
+ * 
+ */
+void button_light_off(Order o);

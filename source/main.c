@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
@@ -6,28 +7,50 @@
 #include "floor_module.h"
 #include "elev_module.h"
 #include "queue_module.h"
+#include "control_module.h"
+
+
 
 
 int main(){
+
+    
+   
+
+
+<<<<<<< HEAD
+    init_floor();
+=======
     elevio_init();
     
     printf("=== Example Program ===\n");
     printf("Press the stop button on the elevator panel to exit\n");
+////////////////////////////////////////////////////////////////////////////
+   
+   ELEV_STATE state = INIT; 
+   int prev_floor = -1;
+   
+   Order current_order;
+   current_order.floor = -1;
 
-    elevio_stopLamp(0);
-    elevio_doorOpenLamp(0);
-
-    
-    int prev_floor = -1;
-
-
-    init_floor();
+>>>>>>> 61cdbce733a9f9ff3d84c6b4c78ade12015735d0
     while(1){
         if(elevio_floorSensor() != -1){
             prev_floor = elevio_floorSensor();
         }
         
+<<<<<<< HEAD
         go_to_floor(3, prev_floor);
+=======
+        //loops buttons to turn on
+        stop();
+
+    
+
+        
+      
+        
+>>>>>>> 61cdbce733a9f9ff3d84c6b4c78ade12015735d0
         
 
         /*
