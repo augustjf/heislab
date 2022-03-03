@@ -29,16 +29,16 @@ void stop(){
         elevio_motorDirection(0);
     } 
 }
-// 4  floor sensor: 2
-int prev_floor = 1;
-void go_to_floor(int floor){
+
+
+void go_to_floor(int floor, int prev_floor){
             
 
             if(elevio_floorSensor() != -1){
                 prev_floor = elevio_floorSensor();
             }
             
-            printf("%d", prev_floor);
+           
         
             if((floor - prev_floor) > 0 ){
                 elevio_motorDirection(DIRN_UP);
@@ -62,13 +62,6 @@ void go_to_floor(int floor){
 
 void run_elevator(){
 
-    //mulige states
-    typedef enum { 
-    INIT   = 0,
-    STANDBY   = 1,
-    FLOOR_REACHED = 2,
-    STOP = 3,
-    } ELEV_STATE;
     
     ELEV_STATE state = INIT;  //settes automatisk til init
 
@@ -122,6 +115,9 @@ void run_elevator(){
             case GO_TO:
                 
 
+                break;
+
+            case FLOOR_REACHED:
                 break;
         }
     }

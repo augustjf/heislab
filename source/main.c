@@ -21,13 +21,13 @@ int main(){
     int prev_floor = -1;
 
 
-
+    init_floor();
     while(1){
         if(elevio_floorSensor() != -1){
             prev_floor = elevio_floorSensor();
         }
         
-        go_to_floor(2);
+        go_to_floor(3, prev_floor);
         
 
         /*

@@ -32,8 +32,10 @@ int check_stop();
  */
 void run_elevator();
 
+void init_floor(void);
+
 /**
  * @brief Elevator goes to floor based on order from queue 
  * 
  */
-void go_to_floor(int floor);
+void go_to_floor(int floor, int prev_floor);
