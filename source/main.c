@@ -13,13 +13,9 @@
 
 int main(){
 
-    
-   
-
-
     elevio_init();
     
-    printf("=== Example Program ===\n");
+
     printf("Press the stop button on the elevator panel to exit\n");
 ////////////////////////////////////////////////////////////////////////////
    
@@ -36,7 +32,7 @@ int main(){
     MotorDirection *current_dirn_ptr;
     current_dirn_ptr = current_dirn;
 
-    empty_queue();
+
 
 
     while(1){
@@ -45,8 +41,6 @@ int main(){
             *prev_floor_ptr = elevio_floorSensor();
         }
         run_elevator(state_ptr, current_dirn_ptr, prev_floor_ptr);
-
-        
 
 
     
