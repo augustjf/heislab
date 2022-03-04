@@ -32,7 +32,7 @@ int main(){
     MotorDirection *current_dirn_ptr;
     current_dirn_ptr = &current_dirn;
 
- 
+    printf("PROGRAMSTART");
 
 
 
