@@ -9,18 +9,15 @@ void floor_light_on() {
     
 }
 
-void button_light_on(int floor, ButtonType btn){
-    
-    
+void button_light_on(int floor, ButtonType btn) {
     if( floor >= 0 && floor <= 3){
-        elevio_buttonLamp(floor, btn, 1);    //because down-buttons are one level higher on board
+        elevio_buttonLamp(floor, btn, 1);    
     }
 }
 
 
 void button_light_off(int floor, ButtonType btn) {
     if(floor >= 0 && floor <= 3){
-        elevio_buttonLamp(floor, btn, 0);    //because down-buttons are one level higher on board
+        elevio_buttonLamp(floor, btn, 0);    
     }
-
 }

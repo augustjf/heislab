@@ -16,7 +16,6 @@ void empty_queue() {
 
 void add_to(int arr[], int call) {
 
-    printf("|inne i add to...|");
     for (int i = 0; i < array_size; i++) {
         if (arr[i] == -1) {
             arr[i] = call;
@@ -52,6 +51,7 @@ void call_finished(int current_floor) {
             floor_orders[i] = temp[i+1];
         }
     }
+    
 }
 
 int next_floor() {
@@ -75,26 +75,25 @@ int next_floor() {
 void read_buttons(enum ELEV_STATE *state, MotorDirection *dirn, int *prev_floor) {
     for(int i = 0; i < 4; i++){
         if(elevio_callButton(i, BUTTON_HALL_UP) == 1){
-            printf("read 1");
+           
             add_call(state, dirn, i, prev_floor, BUTTON_HALL_UP);
             button_light_on(i, BUTTON_HALL_UP);
         }
         else if(elevio_callButton(i, BUTTON_HALL_DOWN) == 1){
-            printf("read 2");
+            
             add_call(state, dirn, i, prev_floor, BUTTON_HALL_DOWN);
             button_light_on(i, BUTTON_HALL_DOWN);
         }
         else if(elevio_callButton(i, BUTTON_CAB) == 1){
-            printf("read 3");
+           
             add_call(state, dirn, i, prev_floor, BUTTON_CAB);
             button_light_on(i, BUTTON_CAB);
+            printf(" knapp ");
 
-                printf("knapp  ");
-                printf("%d", i );
         
 
         }
-        printf("-");
+
     }
 
 }
@@ -105,7 +104,7 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
     //PRIORITIZER//
     int already_in_queue = 0;
     
-    printf("add call");
+ 
 
     for (int i = 0; i < array_size; i++) {
         if ((dirn == DIRN_STOP) && (*prev_floor == elevio_floorSensor())) {
@@ -133,34 +132,20 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
      
         
     }
-    if(*state == STANDBY){
-        printf(" standby ");
-    }
-    if(*state == GO_TO){
-        printf(" go to ");
-    }
-    if(*state == FLOOR_REACHED){
-        printf(" floor reached ");
-    }
+  
 
     if(already_in_queue == 0) {
-        printf(" inne i alfready in q ");
         
         if (*state == STANDBY || *state == FLOOR_REACHED) {
             if (btn == BUTTON_CAB) { 
-                
-                if(btn == BUTTON_CAB){
-                    printf(" btn_cab ");
-                }
-                printf("  add to 1"  );
+              
 
                 add_to(cab_orders, call_floor);
                
                 
             }
             else if (btn == BUTTON_HALL_DOWN || btn == BUTTON_HALL_UP) {
-               
-                printf("  add to 2"  ); 
+        
                 add_to(floor_orders, call_floor);
             }
 
@@ -169,30 +154,29 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
 
         if (*state == GO_TO) {
             if (btn == BUTTON_CAB) {
-                
-                 printf("  add to 3"  );
-                 add_to(cab_orders, call_floor);
+    
+                add_to(cab_orders, call_floor);
             }
             else if (btn == BUTTON_HALL_DOWN) {
                 if ((*dirn == DIRN_DOWN) && (call_floor < *prev_floor)) {
-                    printf("  add to 4"  ); 
+                    
                     add_to(on_the_way_orders, call_floor);
                     
                 }
                 else {
-                    printf("  add to 5"  );
+                    
                     add_to(floor_orders, call_floor);
                 }     
 
             }
             else if (btn == BUTTON_HALL_UP) {
                 if ((*dirn == DIRN_UP) && (call_floor > *prev_floor)) {
-                     printf("  add to 6"  );
+                  
                     add_to(on_the_way_orders, call_floor);
                     
                 }
                 else {
-                    printf("  add to 7"  );
+                   
                     add_to(floor_orders, call_floor);
                     
                 }

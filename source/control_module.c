@@ -102,7 +102,8 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
             elevio_motorDirection(0);
 
             if(elevio_floorSensor() != -1){
-                door_handler(state, current_dirn, prev_floor);                       
+                door_handler(state, current_dirn, prev_floor); 
+                       
             }
 
             while(elevio_stopButton() == 1) {
@@ -120,6 +121,8 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
             floor_light_on();
 
             if(elevio_floorSensor() == next_floor()){
+                
+                printf("%d", next_floor());
                 *state = FLOOR_REACHED;
             }
             
@@ -127,10 +130,11 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
             break;
 
         case FLOOR_REACHED:
+            printf("floor reached");
             elevio_motorDirection(0);
 
 
-            printf("floor reached");
+            
             
     
             button_light_off(next_floor(), BUTTON_HALL_UP);
@@ -138,8 +142,10 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
             button_light_off(next_floor(), BUTTON_CAB);
             
             call_finished(next_floor());
-            //door_handler(state, current_dirn, prev_floor);
-            
+
+            printf("XXX");
+            door_handler(state, current_dirn, prev_floor);
+            print_arrays();
             
             *state = STANDBY;
 
