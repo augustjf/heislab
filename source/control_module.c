@@ -15,17 +15,6 @@ void init_floor(void){
     elevio_motorDirection(0);
 }
 
-void stop(MotorDirection *dirn){
-    int stop_yn = elevio_stopButton();
-    if(stop_yn == 1){
-        elevio_stopLamp(1);
-        elevio_motorDirection(0);
-        *dirn = DIRN_STOP;
-    } 
-    else{
-        elevio_stopLamp(0);
-    }
-}
 
 
 void go_to_floor(int floor, int *prev_floor, MotorDirection *dirn) {   
@@ -85,14 +74,13 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
             break;
         
         case STANDBY:
-            //printf("standby");
             read_buttons(state, current_dirn, prev_floor);
+            
             if(next_floor() != -1) {
                 
                 *state = GO_TO;
             }
-            
-           
+
             break;
 
 
@@ -111,11 +99,24 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
             }
             elevio_stopLamp(0);
 
+            for (int i = 0; i < 4; i++) {
+                elevio_buttonLamp(i, BUTTON_CAB, 0);
+            }
+            for (int i = 0; i < 3; i++) {
+                elevio_buttonLamp(i, BUTTON_HALL_UP, 0);
+                elevio_buttonLamp(i+1, BUTTON_HALL_DOWN, 0);
+            }
 
+
+            
+        
             *state = STANDBY;
+            
+           
             break;
 
         case GO_TO:
+        printf("go to");
             read_buttons(state, current_dirn, prev_floor);
             go_to_floor(next_floor(), prev_floor, current_dirn);
             floor_light_on();
@@ -125,6 +126,8 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
                 printf("%d", next_floor());
                 *state = FLOOR_REACHED;
             }
+
+        
             
 
             break;
@@ -143,7 +146,7 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
             
             call_finished(next_floor());
 
-            printf("XXX");
+           
             door_handler(state, current_dirn, prev_floor);
             print_arrays();
             

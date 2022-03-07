@@ -22,36 +22,27 @@ void add_to(int arr[], int call) {
             break;
         }
     }
-   
+   printf(" add to");
 }
 
 void call_finished(int current_floor) {
-    int temp[array_size];
+
     if (on_the_way_orders[0] == current_floor) {
         for (int i = 0; i < (array_size - 1); i++) {
-            temp[i] = on_the_way_orders[i];
-        }
-        for (int i = 0; i < (array_size - 1); i++) {
-            on_the_way_orders[i] = temp[i+1];
+            on_the_way_orders[i] = on_the_way_orders[i+1];
         }
     }    
     else if (cab_orders[0] == current_floor) {
         for (int i = 0; i < (array_size - 1); i++) {
-            temp[i] = cab_orders[i];
-        }
-        for (int i = 0; i < (array_size - 1); i++) {
-            cab_orders[i] = temp[i+1];
+            cab_orders[i] = on_the_way_orders[i+1];
         }
     }
     else if (floor_orders[0] == current_floor) {
         for (int i = 0; i < (array_size - 1); i++) {
-            temp[i] = floor_orders[i];
-        }
-        for (int i = 0; i < (array_size - 1); i++) {
-            floor_orders[i] = temp[i+1];
+            floor_orders[i] = on_the_way_orders[i+1];
         }
     }
-    
+    printf("call finisheds");
 }
 
 int next_floor() {
@@ -89,6 +80,7 @@ void read_buttons(enum ELEV_STATE *state, MotorDirection *dirn, int *prev_floor)
             add_call(state, dirn, i, prev_floor, BUTTON_CAB);
             button_light_on(i, BUTTON_CAB);
             printf(" knapp ");
+            printf("%d", i);
 
         
 
@@ -103,59 +95,59 @@ void read_buttons(enum ELEV_STATE *state, MotorDirection *dirn, int *prev_floor)
 void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int *prev_floor, ButtonType btn) {
     //PRIORITIZER//
     int already_in_queue = 0;
-    
- 
 
-    for (int i = 0; i < array_size; i++) {
-        if ((dirn == DIRN_STOP) && (*prev_floor == elevio_floorSensor())) {
-            already_in_queue = 1;
+    if ((dirn == DIRN_STOP) && (call_floor == elevio_floorSensor())) {
+        already_in_queue = 1;
+        printf(" if 1 ");
+    }
 
-        
-            break;
-        }
-        else if((on_the_way_orders[i] == call_floor) || (cab_orders[i] == call_floor) || (floor_orders[i] == call_floor)) {
-            already_in_queue = 1;
-         
+    else if (elevio_stopButton()) {
+        already_in_queue = 1; //Ingores calls if sto button is pressed
+        printf(" if 2 ");
 
-
-
-            break;
-        }
-        else if (elevio_stopButton()) {
-            already_in_queue = 1; //Ingores calls if sto button is pressed
-
-          
-        }
-        else {
-            already_in_queue = 0;
-        }
+    }
+   
      
+    for (int i = 0; i < array_size; i++) {
+
+        if((on_the_way_orders[i] == call_floor) || (cab_orders[i] == call_floor) || (floor_orders[i] == call_floor)) {
+            already_in_queue = 1;
+
+
+            break;
+        }
+
         
     }
   
-
+ 
+    
     if(already_in_queue == 0) {
         
         if (*state == STANDBY || *state == FLOOR_REACHED) {
             if (btn == BUTTON_CAB) { 
-              
-
                 add_to(cab_orders, call_floor);
-               
-                
             }
             else if (btn == BUTTON_HALL_DOWN || btn == BUTTON_HALL_UP) {
         
                 add_to(floor_orders, call_floor);
             }
-
-            //on_the_way_orders cannot happen in STANDBY
         }
 
         if (*state == GO_TO) {
             if (btn == BUTTON_CAB) {
-    
-                add_to(cab_orders, call_floor);
+                if ((*dirn == DIRN_DOWN) && (call_floor < *prev_floor)) {
+                    add_to(on_the_way_orders, call_floor);
+                    printf("dirn down ");
+                }
+                if (((*dirn == DIRN_UP) && (call_floor > *prev_floor))) {
+                    add_to(on_the_way_orders, call_floor);
+                    printf("dirn up");
+                }
+                else {
+                    add_to(cab_orders, call_floor);
+                    printf(" else ");
+                }
             }
             else if (btn == BUTTON_HALL_DOWN) {
                 if ((*dirn == DIRN_DOWN) && (call_floor < *prev_floor)) {
@@ -171,9 +163,8 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
             }
             else if (btn == BUTTON_HALL_UP) {
                 if ((*dirn == DIRN_UP) && (call_floor > *prev_floor)) {
-                  
                     add_to(on_the_way_orders, call_floor);
-                    
+
                 }
                 else {
                    
@@ -183,6 +174,7 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
             }
         }
     }
+    printf(" add call \n");
 }
 
 void print_arrays() {
