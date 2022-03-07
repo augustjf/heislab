@@ -115,7 +115,6 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
         break;
 
     case GO_TO:
-        printf("Go to\n");
         read_buttons(state, current_dirn, prev_floor);
         go_to_floor(next_floor(), prev_floor, current_dirn);
         floor_light_on();
@@ -129,7 +128,8 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
         break;
 
     case FLOOR_REACHED:
-        printf("floor reached");
+        printf("floor reached\n");
+        print_arrays();
         elevio_motorDirection(0);
 
         button_light_off(next_floor(), BUTTON_HALL_UP);

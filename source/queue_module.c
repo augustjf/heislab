@@ -27,6 +27,7 @@ void add_to(int arr[], int call)
             break;
         }
     }
+    print_arrays();
 }
 
 void call_finished(int current_floor)
@@ -43,14 +44,14 @@ void call_finished(int current_floor)
     {
         for (int i = 0; i < (array_size - 1); i++)
         {
-            cab_orders[i] = on_the_way_orders[i + 1];
+            cab_orders[i] = cab_orders[i + 1];
         }
     }
     else if (floor_orders[0] == current_floor)
     {
         for (int i = 0; i < (array_size - 1); i++)
         {
-            floor_orders[i] = on_the_way_orders[i + 1];
+            floor_orders[i] = floor_orders[i + 1];
         }
     }
     printf("call finished");
@@ -133,8 +134,7 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
     if (already_in_queue == 0)
     {
 
-        if (*state == STANDBY || *state == FLOOR_REACHED)
-        {
+        if (*state == STANDBY || *state == FLOOR_REACHED) {
             if (btn == BUTTON_CAB)
             {
                 add_to(cab_orders, call_floor);
@@ -165,6 +165,25 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
                     add_to(cab_orders, call_floor);
                 }
             }
+
+            /*
+
+                if (current > call) {
+                    if(read buttons floor order up > første floor que){
+                        add to
+                    }
+                    else{  //read buttons floor order up < første floor que
+                        insert 
+                    }
+                    
+                } 
+
+
+
+
+
+            */
+
             else if (btn == BUTTON_HALL_DOWN)
             {
                 if ((*dirn == DIRN_DOWN) && (call_floor < *prev_floor))
