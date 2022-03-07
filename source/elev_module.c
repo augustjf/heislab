@@ -21,6 +21,6 @@ void door_handler(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
         sec = differense / CLOCKS_PER_SEC;
 
     }
-    
+    printf("closed");
     elevio_doorOpenLamp(0);
 }
