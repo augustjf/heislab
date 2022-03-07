@@ -144,6 +144,8 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
 
                 add_to(floor_orders, call_floor);
             }
+
+            // on_the_way_orders cannot happen in STANDBY
         }
 
         if (*state == GO_TO)
@@ -190,7 +192,6 @@ void add_call(enum ELEV_STATE *state, MotorDirection *dirn, int call_floor, int 
             }
         }
     }
-    printf(" add call \n");
 }
 
 void print_arrays()

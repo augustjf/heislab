@@ -26,7 +26,6 @@ void go_to_floor(int floor, int *prev_floor, MotorDirection *dirn)
     else if ((floor - *prev_floor) < 0)
     {
         elevio_motorDirection(DIRN_DOWN);
-        *dirn = DIRN_DOWN;
     }
 
     else if ((floor - *prev_floor) == 0)
@@ -117,7 +116,7 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
 
     case GO_TO:
         printf("Go to\n");
-            read_buttons(state, current_dirn, prev_floor);
+        read_buttons(state, current_dirn, prev_floor);
         go_to_floor(next_floor(), prev_floor, current_dirn);
         floor_light_on();
 
