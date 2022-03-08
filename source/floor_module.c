@@ -10,14 +10,14 @@ void floor_light_on() {
 }
 
 void button_light_on(int floor, ButtonType btn) {
-    if( floor >= 0 && floor <= 3){
+    if( floor >= 0 && floor <= 3) {
         elevio_buttonLamp(floor, btn, 1);    
     }
 }
 
 
 void button_light_off(int floor, ButtonType btn) {
-    if(floor >= 0 && floor <= 3){
+    if(floor >= 0 && floor <= 3) { 
         elevio_buttonLamp(floor, btn, 0);    
     }
 }
