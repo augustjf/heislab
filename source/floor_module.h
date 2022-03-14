@@ -4,31 +4,23 @@
 /**
  * @file
  * @brief 
- * Library for floor
+ * Library for simple functions connected to the floors.
  */
 
 /**
- * @brief Structure for holding data for each floor. Each floor have a unique initialization 
- * of the struct
- * 
- */
-
-
-
-/**
- * @brief floor light on
+ * @brief Checks the current floor and turns on the light of that floor. 
  * 
  */
 void floor_light_on();
 
 /**
- * @brief floor button light on 
+ * @brief Turns on button lights when they are pressed.
  * 
  */
 void button_light_on(int floor, ButtonType btn);
 
 /**
- * @brief floor light on off, called from floor reached
+ * @brief Turns off button lights. Called when a call is finished.
  * 
  */
 void button_light_off(int floor, ButtonType btn);

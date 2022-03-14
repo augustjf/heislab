@@ -24,20 +24,20 @@ int main()
     int *prev_floor_ptr;
     prev_floor_ptr = &prev_floor;
 
-    MotorDirection current_dirn = STOP;
-    MotorDirection *current_dirn_ptr;
-    current_dirn_ptr = &current_dirn;
+    MotorDirection dirn = STOP;
+    MotorDirection *dirn_ptr;
+    dirn_ptr = &dirn;
 
 
 
     while (1)
     {
-        read_buttons(state_ptr, current_dirn_ptr, prev_floor_ptr);
+        read_buttons(state_ptr, dirn_ptr, prev_floor_ptr);
         if (elevio_floorSensor() != -1)
         {
             *prev_floor_ptr = elevio_floorSensor();
         }
-        run_elevator(state_ptr, current_dirn_ptr, prev_floor_ptr);
+        run_elevator(state_ptr, dirn_ptr, prev_floor_ptr);
 
         nanosleep(&(struct timespec){0, 20 * 1000 * 1000}, NULL);
     }

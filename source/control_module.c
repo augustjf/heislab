@@ -1,15 +1,5 @@
 #include "control_module.h"
 
-void init_floor(void) {
-    if (elevio_floorSensor() == -1) {
-        elevio_motorDirection(-1);
-    }
-
-    while (elevio_floorSensor() == -1) { // waits for elevator to reach a floor
-    }
-
-    elevio_motorDirection(0);
-}
 
 void go_to_floor(int floor, int *prev_floor, MotorDirection *dirn) {
 
@@ -28,7 +18,7 @@ void go_to_floor(int floor, int *prev_floor, MotorDirection *dirn) {
     }
 }
 
-void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *prev_floor)
+void run_elevator(enum ELEV_STATE *state, MotorDirection *dirn, int *prev_floor)
 {
 
     if (elevio_stopButton() == 1) { // må alltid sjekke om det er stop
@@ -61,7 +51,7 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
         break;
 
     case STANDBY:
-        read_buttons(state, current_dirn, prev_floor);
+        read_buttons(state, dirn, prev_floor);
 
         if (next_floor() != -1) {
 
@@ -76,7 +66,7 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
         elevio_motorDirection(0);
 
         if (elevio_floorSensor() != -1) {
-            door_handler(state, current_dirn, prev_floor);
+            door_handler(state, dirn, prev_floor);
         }
 
         while (elevio_stopButton() == 1) {
@@ -97,8 +87,8 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
         break;
 
     case GO_TO:
-        read_buttons(state, current_dirn, prev_floor);
-        go_to_floor(next_floor(), prev_floor, current_dirn);
+        read_buttons(state, dirn, prev_floor);
+        go_to_floor(next_floor(), prev_floor, dirn);
         floor_light_on();
 
         if (elevio_floorSensor() == next_floor()) {
@@ -119,7 +109,7 @@ void run_elevator(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
 
         call_finished(next_floor());
 
-        door_handler(state, current_dirn, prev_floor);
+        door_handler(state, dirn, prev_floor);
         print_arrays();
 
         *state = STANDBY;

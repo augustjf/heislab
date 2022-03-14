@@ -1,6 +1,6 @@
 #include "elev_module.h"
 
-void door_handler(enum ELEV_STATE *state, MotorDirection *current_dirn, int *prev_floor)
+void door_handler(enum ELEV_STATE *state, MotorDirection *dirn, int *prev_floor)
 {
     elevio_doorOpenLamp(1);
 
@@ -10,7 +10,7 @@ void door_handler(enum ELEV_STATE *state, MotorDirection *current_dirn, int *pre
     int light_off = 0;
 
     while (sec < trigger) {
-        read_buttons(state, current_dirn, prev_floor);
+        read_buttons(state, dirn, prev_floor);
 
         if (elevio_obstruction() || elevio_stopButton()) {
             clock_init = clock();
